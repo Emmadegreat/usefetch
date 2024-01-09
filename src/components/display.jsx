@@ -1,17 +1,36 @@
 import React,{useCallback, useEffect, useRef, useState} from 'react'
 
+import UseFetch from './useFetch'
+
 const Display = () => {
 
+    const { dataItem, error, loading } = UseFetch('https://fakestoreapi.com/products');
 
+    if (loading) {
+        return <p>Loading ...</p>
+    }
 
-
+    if (error) {
+        return <p>Error!: { error.message}</p>
+    }
 
     return (
         <div className='flex justify-center items-center m-auto flex-col pt-24'>
-            <h1 className='md:text-3xl text-2xl text-blue-800 md:font-bold font-semibold'>React Form using UseRef Hook</h1>
+            <h1 className='md:text-3xl text-2xl text-blue-800 md:font-bold font-semibold'>
+                useFetch Custom Hook implementation
+            </h1>
 
-            <div className='w-[70%] md:w-[400px] py-4 border-2 rounded p-4 my-4 border-blue-800'>
-            </div>
+            {dataItem.map((item, index) => {
+                return(
+
+                    <ul key={index} className='flex flex-col p-2'>
+                        <li>{item.id}. {item.title}</li>
+                        <img src={item.image} alt="product image" className='w-[200px] h-[200px]' />
+                    </ul>
+
+                )
+
+            })}
         </div>
     )
 }
