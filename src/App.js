@@ -1,11 +1,11 @@
 import './index.css';
 
-import Form from './components/form'
+import Display from './components/display'
 
 function App() {
   return (
     <div className="App">
-      <Form/>
+      <Display/>
     </div>
   );
 }
